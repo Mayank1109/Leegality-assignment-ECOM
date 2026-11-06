@@ -1,16 +1,54 @@
-# React + Vite
+# E-commerce Product Browser
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React application for browsing products, filtering the listing, and viewing product details. Product and category data come from the [DummyJSON API](https://dummyjson.com/).
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Requirements
 
-## React Compiler
+- Node.js 20.19+ or 22.12+
+- npm
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Run locally
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Open the local URL printed by Vite.
+
+### Other commands
+
+```bash
+npm run build    # Create a production build in dist/
+npm run preview  # Preview the production build locally
+npm run lint     # Run ESLint
+```
+
+The app needs an internet connection to retrieve product and category data from DummyJSON.
+
+## Assumptions
+
+- DummyJSON is the source of truth; no local database or authentication is required.
+- The product listing fetches the products for the selected category, then applies price, brand, and text filters in the browser.
+- The listing displays 20 products per page.
+- Category, brand, price, text-search, and page state are represented in URL query parameters where applicable, so listing state can be linked to or restored from a URL.
+- Product and category data may fail to load, so the interface provides loading and error states; product requests can be retried.
+
+## Architectural decisions
+
+- **React with Vite:** keeps the client-side app and development setup lightweight.
+- **React Router:** provides the listing and product-detail routes, along with URL-backed listing state.
+- **API helpers in `src/api/`:** keep fetch and response handling separate from presentation.
+- **Hooks in `src/hooks/`:** isolate product loading/filtering and responsive breakpoint behavior from the page components.
+- **Page and reusable UI separation:** `src/pages/` composes screens, while `src/components/` and `src/ui/` hold reusable layout, filters, and interface elements.
+- **Client-side filtering and pagination:** appropriate for the assignment's modest data set and allows filters to respond without additional requests.
+
+## Improvements with more time
+
+- Add automated tests for filtering, URL state, pagination, loading/error states, and product details.
+- Debounce text-based filtering and consider moving filtering and pagination to the API if the catalog grows.
+- Add stronger validation and clearer handling for incomplete or unexpected API data.
+- Review keyboard, screen-reader, and mobile interactions across both screens.
+- Add environment-based API configuration and caching if the app needs to support a different backend or reduce repeat requests.
