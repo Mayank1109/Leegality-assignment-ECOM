@@ -1,28 +1,41 @@
 :root {
-  --header-height: 3rem;
+  /* 1 "design unit" = 1px of the mockup. Every layout size is a multiple
+     of this, so the whole UI scales together.
+     Overall size knob: raise the 900 to shrink everything, lower it to grow.
+     The clamp keeps text readable on small screens and sane on huge ones. */
+  --u: clamp(1.4px, calc(100vw / 900), 2.4px);
+
+  --header-height: calc(36 * var(--u));
   --hue: 0;
   --sat: 0%;
   --title-color: hsl(var(--hue), var(--sat), 20%);
   --title-color-dark: #1c1c1c;
   --text-color: hsl(var(--hue), var(--sat), 46%);
 
-  --bg: #edf2ee;
+  --bg: #fdfdfd;
   --surface: #f7faf7;
   --surface-2: #ffffff;
+  --sidenav-bg: #f3f2f4;
   --border: #d4ddd5;
+  --divider: #e5e5e8;
+  --input-border: #dcdce0;
+  --header-bg: #324459;
+  --text-strong: #222326;
+  --text-option: #2f3033;
+  --placeholder: #8b8f98;
   --border-strong: #bec9bf;
   --svg-color: #c5cad2;
 
   --text-muted: #8a9e8c;
-  --body-color: #edf2ee;
+  --body-color: #fdfdfd;
   --container-color: #f7faf7;
 
   --highlight-color: #378df1;
   --highlight-dark: #297ad7;
 
   /*========== Font and typography ==========*/
-  --heading-font: "Plus Jakarta Sans", sans-serif;
-  --body-font: "Inter", sans-serif;
+  --heading-font: "Nunito Sans", sans-serif;
+  --body-font: "Nunito Sans", sans-serif;
 
   --big-font-size: 2.5rem;
   --h1-font-size: 1.75rem;
@@ -173,8 +186,7 @@ img {
 .app-shell {
   display: flex;
   flex-direction: column;
-  zoom: 80%;
-  height: 125vh;
+  height: 100vh;
 }
 .main-content {
   flex: 1;
@@ -196,40 +208,4 @@ img {
 }
 .margin-bottom {
   margin-bottom: var(--mb-0-5);
-}
-
-/*========== Product listing ==========*/
-.listing {
-  display: flex;
-  height: 100%;
-}
-.listing__content {
-  flex: 1;
-  padding: var(--mb-1) var(--mb-1-5);
-  overflow-y: auto;
-}
-
-/*========== Filters side nav ==========*/
-.sidenav {
-  width: 240px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--mb-1);
-  padding: var(--mb-1);
-  background-color: var(--surface);
-  border-right: 1px solid var(--border);
-  overflow-y: auto;
-}
-.sidenav__group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--mb-0-5);
-  padding-top: var(--mb-1);
-  border-top: 1px solid var(--border);
-}
-
-/*========== Product detail ==========*/
-.detail {
-  padding: var(--mb-1) var(--mb-1-5);
 }

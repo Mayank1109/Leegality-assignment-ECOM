@@ -1,11 +1,30 @@
+/* Sizes are in design units (--u), measured from the mockup. */
 .header {
-  background-color: #324459;
-  height: var(--header-height);
-  justify-content: space-between;
+  display: grid !important;
+  grid-template-columns: 1fr calc(315 * var(--u)) 1fr;
   align-items: center;
-  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+  height: var(--header-height);
+  padding: 0 calc(35 * var(--u)) 0 calc(30 * var(--u));
+  background-color: var(--header-bg);
 }
-
+.header > svg {
+  /* the menu glyph has built-in padding, so the box is larger than it looks */
+  width: calc(22 * var(--u));
+  height: calc(22 * var(--u));
+}
+.header .searchbox {
+  width: 100%;
+  height: calc(25 * var(--u));
+  border-radius: calc(3 * var(--u));
+  background-color: #f6f6f7;
+}
 .header__icons {
-  gap: 1rem;
+  justify-self: end;
+  align-items: center;
+  gap: calc(16 * var(--u));
+}
+.header__icons svg {
+  width: calc(17 * var(--u));
+  height: calc(17 * var(--u));
 }

@@ -1,25 +1,22 @@
 import { Searchbox } from "../ui/searchbox";
-
+import { CategoryFilter } from "./filters/categoryFilter";
+import { PriceFilter } from "./filters/priceFilter";
+import { BrandFilter } from "./filters/brandFilter";
+import "./sideNav.css";
 // Filters panel for the Product Listing page (left side in the mockup).
-export const SideNav = () => {
+export const SideNav = ({ brands, productsStatus }) => {
   return (
     <aside className="sidenav">
-      <Searchbox />
+      <Searchbox
+        style={{ width: "100%", border: "1px solid var(--border)" }}
+        placeholder="Search..."
+      />
 
-      <section className="sidenav__group">
-        <h3>Categories</h3>
-        {/* TODO: checkboxes from GET /products/categories */}
-      </section>
+      <CategoryFilter />
 
-      <section className="sidenav__group">
-        <h3>Price Range</h3>
-        {/* TODO: min / max inputs */}
-      </section>
+      <PriceFilter />
 
-      <section className="sidenav__group">
-        <h3>Brands</h3>
-        {/* TODO: unique brands extracted from fetched products */}
-      </section>
+      <BrandFilter brands={brands} status={productsStatus} />
     </aside>
   );
 };

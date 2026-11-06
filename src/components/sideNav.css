@@ -1,0 +1,67 @@
+/* Sizes are in design units (--u), measured from the mockup. */
+
+/*========== Product listing ==========*/
+.listing {
+  display: flex;
+  height: 100%;
+}
+.listing__content {
+  flex: 1;
+  padding: calc(18 * var(--u)) calc(11 * var(--u)) calc(18 * var(--u))
+    calc(14 * var(--u));
+  overflow-y: auto;
+}
+.listing__title {
+  display: flex;
+  align-items: center;
+  gap: calc(5 * var(--u));
+  margin-bottom: calc(13 * var(--u));
+  font-size: calc(13.5 * var(--u));
+  font-weight: var(--font-bold);
+  color: var(--text-strong);
+  letter-spacing: 0;
+}
+.listing__title svg {
+  width: calc(13 * var(--u));
+  height: calc(13 * var(--u));
+}
+
+/*========== Filters side nav ==========*/
+.sidenav {
+  width: calc(173 * var(--u));
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: calc(13 * var(--u)) calc(11 * var(--u)) calc(13 * var(--u))
+    calc(17 * var(--u));
+  background-color: var(--sidenav-bg);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.sidenav > .searchbox {
+  flex-shrink: 0;
+  height: calc(27 * var(--u));
+  margin-bottom: calc(9 * var(--u));
+  border-radius: calc(4 * var(--u));
+  border-color: var(--input-border) !important;
+}
+.sidenav__group {
+  display: flex;
+  flex-direction: column;
+  padding: calc(9 * var(--u)) 0 calc(10 * var(--u));
+  border-top: 1px solid var(--divider);
+}
+.sidenav__group > :is(h2, h3) {
+  margin-bottom: calc(9 * var(--u));
+  font-size: calc(11.5 * var(--u));
+  font-weight: var(--font-bold);
+  line-height: calc(14 * var(--u));
+  color: var(--text-strong);
+  letter-spacing: 0;
+}
+
+/*========== Product detail ==========*/
+.detail {
+  padding: calc(18 * var(--u)) calc(14 * var(--u));
+}

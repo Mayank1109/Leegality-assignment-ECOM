@@ -1,0 +1,103 @@
+/*========== Filters ==========*/
+.filter__list {
+  display: flex;
+  flex-direction: column;
+}
+.filter__option {
+  display: flex;
+  align-items: center;
+  gap: calc(7 * var(--u));
+  height: calc(19.5 * var(--u));
+  font-size: calc(10.5 * var(--u));
+  font-weight: var(--font-medium);
+  color: var(--text-option);
+  cursor: pointer;
+}
+.filter__option input[type="checkbox"] {
+  appearance: none;
+  flex-shrink: 0;
+  width: calc(10 * var(--u));
+  height: calc(10 * var(--u));
+  margin: 0;
+  border: 1px solid var(--input-border);
+  border-radius: calc(2 * var(--u));
+  background-color: var(--surface-2);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.filter__option input[type="checkbox"]:checked {
+  border-color: var(--highlight-color);
+  background-color: var(--highlight-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M4 8.5l2.5 2.5L12 5.5'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
+.filter__option input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+.filter__more {
+  align-self: flex-start;
+  margin-top: calc(4 * var(--u));
+  font-size: calc(10 * var(--u));
+  color: var(--highlight-color);
+  font-weight: var(--font-medium);
+}
+
+/*========== Price range ==========*/
+.price-filter {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+}
+.price-filter__inputs {
+  display: flex;
+  gap: calc(7 * var(--u));
+}
+.filter__input {
+  flex: 1;
+  min-width: 0;
+  height: calc(25 * var(--u));
+  padding: 0 calc(7 * var(--u));
+  border: 1px solid var(--input-border);
+  border-radius: calc(3 * var(--u));
+  background-color: var(--surface-2);
+  color: var(--text-strong);
+  font-size: calc(10.5 * var(--u));
+  outline: none;
+}
+.filter__input::placeholder {
+  color: var(--placeholder);
+}
+.filter__input:focus {
+  border-color: var(--highlight-color);
+}
+.filter__apply {
+  height: calc(22 * var(--u));
+  border-radius: calc(3 * var(--u));
+  background-color: var(--highlight-color);
+  color: #fff;
+  font-size: calc(10.5 * var(--u));
+  font-weight: var(--font-medium);
+}
+.filter__apply:hover {
+  background-color: var(--highlight-dark);
+}
+.filter__apply:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.filter__status {
+  font-size: calc(10 * var(--u));
+  color: var(--text-muted);
+}
+.filter__status--error {
+  color: #c0392b;
+}
+.filter__retry {
+  color: var(--highlight-color);
+  font-weight: var(--font-semi-bold);
+  text-decoration: underline;
+}
