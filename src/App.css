@@ -1,19 +1,13 @@
 :root {
-  /* 1 "design unit" = 1px of the mockup. Every layout size is a multiple
-     of this, so the whole UI scales together.
-     Overall size knob: raise the 900 to shrink everything, lower it to grow.
-     The clamp keeps text readable on small screens and sane on huge ones. */
   --u: clamp(1.4px, calc(100vw / 900), 2.4px);
 
   --header-height: calc(36 * var(--u));
   --hue: 0;
   --sat: 0%;
   --title-color: hsl(var(--hue), var(--sat), 20%);
-  --title-color-dark: #1c1c1c;
   --text-color: hsl(var(--hue), var(--sat), 46%);
 
   --bg: #fdfdfd;
-  --surface: #f7faf7;
   --surface-2: #ffffff;
   --sidenav-bg: #f3f2f4;
   --border: #d4ddd5;
@@ -27,8 +21,6 @@
   --svg-color: #c5cad2;
 
   --text-muted: #8a9e8c;
-  --body-color: #fdfdfd;
-  --container-color: #f7faf7;
 
   --highlight-color: #378df1;
   --highlight-dark: #297ad7;
@@ -153,36 +145,6 @@ img {
   height: auto;
 }
 
-.section {
-  padding: 4rem 0 2rem;
-  background-color: var(--container-color);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-}
-
-.section__title {
-  font-family: var(--heading-font);
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-extra-bold);
-  color: var(--title-color);
-  letter-spacing: -0.5px;
-}
-
-.section__subtitle {
-  font-size: var(--small-font-size);
-  font-weight: var(--font-medium);
-  color: var(--text-muted);
-  display: block;
-  margin-top: 0.25rem;
-}
-
-.container {
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 0.5rem;
-}
-
 .app-shell {
   display: flex;
   flex-direction: column;
@@ -194,18 +156,27 @@ img {
   overflow-y: auto;
 }
 
-.grid {
-  display: grid;
-  gap: 1.5rem;
-}
 .flex {
   display: flex !important;
 }
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+/*========== Loading skeleton (shared) ==========*/
+.skeleton {
+  border-radius: calc(3 * var(--u));
+  background: linear-gradient(90deg, #f0f0f2 25%, #e6e6ea 50%, #f0f0f2 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s ease-in-out infinite;
 }
-.margin-bottom {
-  margin-bottom: var(--mb-0-5);
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
 }

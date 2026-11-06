@@ -1,0 +1,37 @@
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(2.5 * var(--u));
+}
+.rating__stars {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+}
+.rating__track,
+.rating__fill {
+  display: inline-flex;
+  gap: calc(0.5 * var(--u));
+}
+.rating__track svg {
+  fill: #e3e3e6;
+}
+
+.rating__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.rating__fill svg {
+  fill: #f5b301;
+}
+.rating svg {
+  flex-shrink: 0;
+  width: calc(9 * var(--u));
+  height: calc(9 * var(--u));
+}
+.rating__value {
+  font-size: calc(8 * var(--u));
+  color: #55585e;
+}

@@ -2,21 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { fetchProducts } from "../api/products";
 
-/**
- * Reads the filters from the URL, fetches products for the selected category,
- * and applies price + brand filters client-side.
- */
 export const useProducts = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category") ?? "";
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const brandsParam = searchParams.getAll("brand").join("|");
+  const query = (searchParams.get("q") ?? "").trim().toLowerCase();
 
   const [reloadKey, setReloadKey] = useState(0);
   const requestKey = `${category}#${reloadKey}`;
-  // The result is tagged with the request it belongs to. If its key doesn't
-  // match the current one, a newer request is in flight -> "loading".
   const [result, setResult] = useState({ key: null, data: [], error: null });
 
   useEffect(() => {
@@ -53,13 +48,19 @@ export const useProducts = () => {
     const selectedBrands = brandsParam ? brandsParam.split("|") : [];
     const min = minPrice ? Number(minPrice) : -Infinity;
     const max = maxPrice ? Number(maxPrice) : Infinity;
+    const matchesQuery = (p) =>
+      !query ||
+      p.title.toLowerCase().includes(query) ||
+      (p.brand ?? "").toLowerCase().includes(query);
+
     return categoryProducts.filter(
       (p) =>
         p.price >= min &&
         p.price <= max &&
-        (selectedBrands.length === 0 || selectedBrands.includes(p.brand)),
+        (selectedBrands.length === 0 || selectedBrands.includes(p.brand)) &&
+        matchesQuery(p),
     );
-  }, [categoryProducts, minPrice, maxPrice, brandsParam]);
+  }, [categoryProducts, minPrice, maxPrice, brandsParam, query]);
 
   return {
     products,

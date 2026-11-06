@@ -1,13 +1,53 @@
-import { Outlet } from "react-router";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { Header } from "./header";
+import { MOBILE_QUERY, useMediaQuery } from "../hooks/useMediaQuery";
 
-// Shared shell for every screen: header on top, current route below.
 export const Layout = () => {
+  const isMobile = useMediaQuery(MOBILE_QUERY);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop
+  const [drawerOpen, setDrawerOpen] = useState(false); // mobile
+  const location = useLocation();
+  const navigate = useNavigate();
+  const onListing = location.pathname === "/";
+
+  const handleMenuClick = () => {
+    if (!onListing) {
+      navigate("/");
+      setSidebarCollapsed(false);
+      setDrawerOpen(isMobile);
+      return;
+    }
+    if (isMobile) setDrawerOpen((open) => !open);
+    else setSidebarCollapsed((collapsed) => !collapsed);
+  };
+
+  // Escape closes the mobile drawer.
+  useEffect(() => {
+    if (!isMobile || !drawerOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setDrawerOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMobile, drawerOpen]);
+
   return (
     <div className="app-shell">
-      <Header />
+      <Header
+        onMenuClick={handleMenuClick}
+        menuExpanded={onListing && (isMobile ? drawerOpen : !sidebarCollapsed)}
+      />
       <main className="main-content">
-        <Outlet />
+        <Outlet
+          context={{
+            isMobile,
+            sidebarCollapsed,
+            drawerOpen: isMobile && drawerOpen,
+            openDrawer: () => setDrawerOpen(true),
+            closeDrawer: () => setDrawerOpen(false),
+          }}
+        />
       </main>
     </div>
   );

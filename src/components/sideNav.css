@@ -1,6 +1,3 @@
-/* Sizes are in design units (--u), measured from the mockup. */
-
-/*========== Product listing ==========*/
 .listing {
   display: flex;
   height: 100%;
@@ -52,7 +49,7 @@
   padding: calc(9 * var(--u)) 0 calc(10 * var(--u));
   border-top: 1px solid var(--divider);
 }
-.sidenav__group > :is(h2, h3) {
+.sidenav__group > h3 {
   margin-bottom: calc(9 * var(--u));
   font-size: calc(11.5 * var(--u));
   font-weight: var(--font-bold);
@@ -61,7 +58,63 @@
   letter-spacing: 0;
 }
 
-/*========== Product detail ==========*/
-.detail {
-  padding: calc(18 * var(--u)) calc(14 * var(--u));
+/* Mobile-only "Filters" button that opens the drawer */
+.listing__filters-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(5 * var(--u));
+  font: inherit;
+  color: inherit;
+}
+
+/*========== Mobile: filters become an off-canvas drawer ==========*/
+.sidenav__drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(10 * var(--u));
+  font-size: calc(13 * var(--u));
+  font-weight: var(--font-bold);
+  color: var(--text-strong);
+}
+.sidenav__close {
+  width: calc(26 * var(--u));
+  height: calc(26 * var(--u));
+  border-radius: 50%;
+  font-size: calc(18 * var(--u));
+  line-height: 1;
+  color: var(--text-strong);
+}
+.sidenav__close:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.sidenav-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: var(--z-modal);
+    width: min(85vw, 320px);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  .sidenav.is-open {
+    transform: translateX(0);
+  }
+  .sidenav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--z-modal) - 1);
+    background-color: rgba(15, 20, 28, 0.45);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidenav {
+    transition: none;
+  }
 }

@@ -1,9 +1,7 @@
 import { useSearchParams } from "react-router";
 import { CheckboxList } from "../../ui/checkboxList";
 import "./filters.css";
-
-/** Multi-select brand filter. Brands are extracted from the fetched products. */
-export const BrandFilter = ({ brands, status }) => {
+export const BrandFilter = ({ brands, status, query = "" }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selected = searchParams.getAll("brand");
 
@@ -41,6 +39,7 @@ export const BrandFilter = ({ brands, status }) => {
           items={brands.map((b) => ({ value: b, label: b }))}
           isChecked={(b) => selected.includes(b)}
           onToggle={handleToggle}
+          query={query}
         />
       )}
     </section>

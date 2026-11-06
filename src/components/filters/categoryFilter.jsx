@@ -4,7 +4,7 @@ import { fetchCategories } from "../../api/products";
 import { CheckboxList } from "../../ui/checkboxList";
 import "./filters.css";
 
-export const CategoryFilter = () => {
+export const CategoryFilter = ({ query = "" }) => {
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState("loading"); // loading | success | error
   const [reloadKey, setReloadKey] = useState(0);
@@ -24,7 +24,6 @@ export const CategoryFilter = () => {
         if (err.name !== "AbortError") setStatus("error");
       });
 
-    // Cancels the request on unmount (and the StrictMode double-run).
     return () => controller.abort();
   }, [reloadKey]);
 
@@ -40,7 +39,7 @@ export const CategoryFilter = () => {
 
   return (
     <section className="sidenav__group">
-      <h2>Categories</h2>
+      <h3>Categories</h3>
 
       {status === "loading" && <p className="filter__status">Loading…</p>}
 
@@ -67,6 +66,7 @@ export const CategoryFilter = () => {
           }))}
           isChecked={(slug) => selected === slug}
           onToggle={handleToggle}
+          query={query}
         />
       )}
     </section>
