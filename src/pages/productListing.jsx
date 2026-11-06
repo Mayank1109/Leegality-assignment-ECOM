@@ -1,11 +1,10 @@
 import { useRef } from "react";
-import { useOutletContext } from "react-router";
+import { useOutletContext, useSearchParams } from "react-router";
 import { SideNav } from "../components/sideNav";
 import { ProductGrid } from "../components/productGrid";
 import { Pagination } from "../ui/pagination";
 import { SearchIcon } from "../assets/appIcons.jsx";
 import { useProducts } from "../hooks/useProducts";
-import { usePagination } from "../hooks/usePagination";
 
 const PAGE_SIZE = 20;
 
@@ -13,14 +12,22 @@ export const ProductListing = () => {
   const { isMobile, sidebarCollapsed, drawerOpen, openDrawer, closeDrawer } =
     useOutletContext();
   const { products, brands, status, retry } = useProducts();
-  const { page, totalPages, pageItems, setPage } = usePagination(
-    products,
-    PAGE_SIZE,
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
+  const requestedPage = Number.parseInt(searchParams.get("page") ?? "1", 10);
+  const page = Number.isNaN(requestedPage)
+    ? 1
+    : Math.min(Math.max(requestedPage, 1), totalPages);
+  const start = (page - 1) * PAGE_SIZE;
+  const pageItems = products.slice(start, start + PAGE_SIZE);
   const contentRef = useRef(null);
 
   const handlePageChange = (next) => {
-    setPage(next);
+    setSearchParams((params) => {
+      if (next <= 1) params.delete("page");
+      else params.set("page", String(next));
+      return params;
+    });
     contentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
