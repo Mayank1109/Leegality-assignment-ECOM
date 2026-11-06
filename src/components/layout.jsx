@@ -22,7 +22,6 @@ export const Layout = () => {
     else setSidebarCollapsed((collapsed) => !collapsed);
   };
 
-  // Escape closes the mobile drawer.
   useEffect(() => {
     if (!isMobile || !drawerOpen) return;
     const onKeyDown = (e) => {
