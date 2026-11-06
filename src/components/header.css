@@ -1,0 +1,11 @@
+.header {
+  background-color: #324459;
+  height: var(--header-height);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.header__icons {
+  gap: 1rem;
+}

@@ -1,0 +1,235 @@
+:root {
+  --header-height: 3rem;
+  --hue: 0;
+  --sat: 0%;
+  --title-color: hsl(var(--hue), var(--sat), 20%);
+  --title-color-dark: #1c1c1c;
+  --text-color: hsl(var(--hue), var(--sat), 46%);
+
+  --bg: #edf2ee;
+  --surface: #f7faf7;
+  --surface-2: #ffffff;
+  --border: #d4ddd5;
+  --border-strong: #bec9bf;
+  --svg-color: #c5cad2;
+
+  --text-muted: #8a9e8c;
+  --body-color: #edf2ee;
+  --container-color: #f7faf7;
+
+  --highlight-color: #378df1;
+  --highlight-dark: #297ad7;
+
+  /*========== Font and typography ==========*/
+  --heading-font: "Plus Jakarta Sans", sans-serif;
+  --body-font: "Inter", sans-serif;
+
+  --big-font-size: 2.5rem;
+  --h1-font-size: 1.75rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 0.875rem;
+  --small-font-size: 0.8125rem;
+  --smaller-font-size: 0.75rem;
+  --tiny-font-size: 0.6875rem;
+
+  /*========== Font weight ==========*/
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+
+  /*========== Spacing ==========*/
+  --mb-0-25: 0.25rem;
+  --mb-0-5: 0.5rem;
+  --mb-0-75: 0.75rem;
+  --mb-1: 1rem;
+  --mb-1-5: 1.5rem;
+  --mb-2: 2rem;
+  --mb-2-5: 2.5rem;
+  --mb-3: 3rem;
+
+  /*========== Border radius ==========*/
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-color);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--heading-font);
+  color: var(--title-color);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.4px;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-extra-bold);
+}
+h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-bold);
+}
+h3 {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-semi-bold);
+}
+
+p {
+  font-size: var(--smaller-font-size);
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: var(--highlight-color);
+}
+a:hover {
+  opacity: 0.85;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--body-font);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.section {
+  padding: 4rem 0 2rem;
+  background-color: var(--container-color);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+
+.section__title {
+  font-family: var(--heading-font);
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-extra-bold);
+  color: var(--title-color);
+  letter-spacing: -0.5px;
+}
+
+.section__subtitle {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 0.5rem;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  zoom: 80%;
+  height: 125vh;
+}
+.main-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.flex {
+  display: flex !important;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.margin-bottom {
+  margin-bottom: var(--mb-0-5);
+}
+
+/*========== Product listing ==========*/
+.listing {
+  display: flex;
+  height: 100%;
+}
+.listing__content {
+  flex: 1;
+  padding: var(--mb-1) var(--mb-1-5);
+  overflow-y: auto;
+}
+
+/*========== Filters side nav ==========*/
+.sidenav {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mb-1);
+  padding: var(--mb-1);
+  background-color: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.sidenav__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mb-0-5);
+  padding-top: var(--mb-1);
+  border-top: 1px solid var(--border);
+}
+
+/*========== Product detail ==========*/
+.detail {
+  padding: var(--mb-1) var(--mb-1-5);
+}
